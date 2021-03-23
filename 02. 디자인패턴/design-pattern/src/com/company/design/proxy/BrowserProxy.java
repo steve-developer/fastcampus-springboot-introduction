@@ -1,6 +1,6 @@
 package com.company.design.proxy;
 
-public class BrowserProxy implements IBroswer{
+public class BrowserProxy implements IBrowser {
 
     private String url;
     private Html html;

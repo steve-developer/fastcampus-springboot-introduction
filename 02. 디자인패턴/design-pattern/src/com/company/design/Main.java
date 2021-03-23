@@ -1,19 +1,23 @@
 package com.company.design;
 
 import com.company.design.adapter.*;
+import com.company.design.aop.AopProxy;
+import com.company.design.aop.IAopBrowser;
 import com.company.design.decorator.*;
 import com.company.design.facade.SftpClient;
 import com.company.design.observer.IButtonClickListener;
 import com.company.design.observer.MyButton;
 import com.company.design.proxy.BrowserProxy;
-import com.company.design.proxy.IBroswer;
+import com.company.design.proxy.IBrowser;
 import com.company.design.singleton.AClazz;
 import com.company.design.singleton.BClazz;
 import com.company.design.strategy.*;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 	    System.out.println("main");
 
         HairDryer hairDryer = new HairDryer();
@@ -63,7 +67,7 @@ public class Main {
         System.out.println(normalEncoder.getMessage("message"));
 
 
-        IBroswer Browser = new BrowserProxy("www.naver.com");
+        IBrowser Browser = new BrowserProxy("www.naver.com");
         Browser.show();
         Browser.show();
 
@@ -78,6 +82,22 @@ public class Main {
 
         ICar audi5 = new A5(audi);
         audi5.showCost();
+
+        AtomicLong startTime = new AtomicLong();
+        AtomicLong endTime = new AtomicLong();
+        IAopBrowser aopBrowser = new AopProxy(
+                "www.google.com",
+                () -> {
+                    System.out.println("before");
+                    startTime.set(System.currentTimeMillis());
+                },
+                () -> {
+                    System.out.println("after");
+                    endTime.set(System.currentTimeMillis() - startTime.get());
+                }
+        );
+        aopBrowser.show();
+        System.out.println(endTime + " ms");
     }
 
     public static void connect(Electronic110V electronic110V){
