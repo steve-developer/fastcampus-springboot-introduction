@@ -1,3 +1,4 @@
+/*
 package com.example.aop.aop;
 
 import org.apache.commons.io.IOUtils;
@@ -38,4 +39,4 @@ public class TimerAop {
         final ContentCachingResponseWrapper res = (ContentCachingResponseWrapper) response;
         System.out.println(IOUtils.toString(res.getContentAsByteArray(),"UTF-8"));
     }
-}
+}*/
