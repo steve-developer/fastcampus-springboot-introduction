@@ -1,4 +1,4 @@
-package com.example.springioc;
+package com.example.ioc;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
