@@ -5,6 +5,7 @@ import com.example.filterandinterceptor.dto.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@AuthUser
 @RestController
 @RequestMapping("/api")
 public class ApiController {
@@ -14,7 +15,6 @@ public class ApiController {
         return user;
     }
 
-    @AuthUser
     @DeleteMapping("/delete")
     public ResponseEntity post(){
         return ResponseEntity.ok().build();
