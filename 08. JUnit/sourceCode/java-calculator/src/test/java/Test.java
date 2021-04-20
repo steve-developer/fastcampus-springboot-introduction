@@ -1,7 +1,6 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -23,7 +22,7 @@ public class Test {
 
     @org.junit.jupiter.api.Test
     public void dollar(){
-        DollarCalculator dollarCalculator = new DollarCalculator(100);
+        DollarCalculator dollarCalculator = new DollarCalculator(null);
         Calculator calculator = new Calculator(dollarCalculator);
         int sum = calculator.sum(100, 100);
         Assertions.assertEquals(20000, sum);
@@ -31,8 +30,10 @@ public class Test {
 
     @org.junit.jupiter.api.Test
     public void mock(){
-        int price = marketServer.price();
-        Calculator calculator = new Calculator(new DollarCalculator(price));
+        DollarCalculator dollarCalculator = new DollarCalculator(marketServer);
+        dollarCalculator.init();
+
+        Calculator calculator = new Calculator(dollarCalculator);
         int sum = calculator.sum(100, 100);
         Assertions.assertEquals(40000, sum);
     }

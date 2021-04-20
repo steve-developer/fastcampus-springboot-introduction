@@ -1,8 +1,13 @@
 public class DollarCalculator implements ICalculator{
-    private int market = 100;
+    private int market = 0;
+    private MarketServer marketServer;
 
-    public DollarCalculator(int market){
-        this.market = market;
+    public DollarCalculator(MarketServer marketServer){
+        this.marketServer = marketServer;
+    }
+
+    public void init(){
+        this.market = marketServer.price();
     }
 
     @Override
